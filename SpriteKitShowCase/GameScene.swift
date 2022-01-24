@@ -8,84 +8,117 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
+    var game: Game {
+        return Game.shared
+    }
+    
+    let humanComponentSystem = GKComponentSystem(componentClass: HumanComponent.self)
+    let playerControlComponentSystem = GKComponentSystem(componentClass: PlayerControlComponent.self)
+    
+    var entities = [GKEntity]()
+    var player: PlayerEntity?
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        game.gameScene = self
+    }
     
     override func didMove(to view: SKView) {
+        physicsWorld.contactDelegate = self
+        setupEntities()
+        addComponentsToComponentSystems()
+    }
+    
+    func setupEntities() {
+        player = PlayerEntity(game: game)
+        entities.append(player!)
         
-        // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
-            label.alpha = 0.0
-            label.run(SKAction.fadeIn(withDuration: 2.0))
+        var index: Int = 0
+        while let node = self.childNode(withName: "wall" + String(index)) as? SKSpriteNode {
+            let entity = ObstacleEntity(game: game, node: node)
+            entities.append(entity)
+            index += 1
         }
         
-        // Create shape node to use during mouse interaction
-        let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        
-        if let spinnyNode = self.spinnyNode {
-            spinnyNode.lineWidth = 2.5
-            
-            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
+        if let node = self.childNode(withName: "ground") as? SKSpriteNode {
+            let entity = ObstacleEntity(game: game, node: node)
+            entities.append(entity)
         }
     }
     
-    
-    func touchDown(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-        }
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
+    func addComponentsToComponentSystems() {
+        for entity in entities {
+            humanComponentSystem.addComponent(foundIn: entity)
+            playerControlComponentSystem.addComponent(foundIn: entity)
         }
     }
     
     override func mouseDown(with event: NSEvent) {
-        self.touchDown(atPoint: event.location(in: self))
     }
     
     override func mouseDragged(with event: NSEvent) {
-        self.touchMoved(toPoint: event.location(in: self))
     }
     
     override func mouseUp(with event: NSEvent) {
-        self.touchUp(atPoint: event.location(in: self))
     }
     
     override func keyDown(with event: NSEvent) {
-        switch event.keyCode {
-        case 0x31:
-            if let label = self.label {
-                label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-            }
-        default:
-            print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
+        for case let component as PlayerControlComponent in playerControlComponentSystem.components {
+            component.keyDown(with: event)
         }
     }
     
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+    }
+    
+    // MARK: SKPhysicsContactDelegate
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        handleContact(contact: contact) { (ContactNotifiableType: ContactNotifiableType, otherEntity: GKEntity) in
+            ContactNotifiableType.contactWithEntityDidBegin(otherEntity, contact: contact)
+        }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        handleContact(contact: contact) { (ContactNotifiableType: ContactNotifiableType, otherEntity: GKEntity) in
+            ContactNotifiableType.contactWithEntityDidEnd(otherEntity, contack: contact)
+        }
+    }
+    
+    private func handleContact(contact: SKPhysicsContact, contactCallback: (ContactNotifiableType, GKEntity) -> Void) {
+        // Get the `ColliderType` for each contacted body.
+        let colliderTypeA = ColliderType(rawValue: contact.bodyA.categoryBitMask)
+        let colliderTypeB = ColliderType(rawValue: contact.bodyB.categoryBitMask)
+        
+        // Determine which `ColliderType` should be notified of the contact.
+        let aWantsCallback = colliderTypeA.notifyOnContactWith(colliderTypeB)
+        let bWantsCallback = colliderTypeB.notifyOnContactWith(colliderTypeA)
+        
+        // Make sure that at least one of the entities wants to handle this contact.
+        assert(aWantsCallback || bWantsCallback, "Unhandled physics contact - A = \(colliderTypeA), B = \(colliderTypeB)")
+        
+        let entityA = contact.bodyA.node?.entity
+        let entityB = contact.bodyB.node?.entity
+
+        /*
+            If `entityA` is a notifiable type and `colliderTypeA` specifies that it should be notified
+            of contact with `colliderTypeB`, call the callback on `entityA`.
+        */
+        if let notifiableEntity = entityA as? ContactNotifiableType, let otherEntity = entityB, aWantsCallback {
+            contactCallback(notifiableEntity, otherEntity)
+        }
+        
+        /*
+            If `entityB` is a notifiable type and `colliderTypeB` specifies that it should be notified
+            of contact with `colliderTypeA`, call the callback on `entityB`.
+        */
+        if let notifiableEntity = entityB as? ContactNotifiableType, let otherEntity = entityA, bWantsCallback {
+            contactCallback(notifiableEntity, otherEntity)
+        }
     }
 }

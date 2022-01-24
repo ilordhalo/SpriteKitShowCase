@@ -7,6 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77233E91278EBDC200685232 /* SKSCState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E90278EBDC200685232 /* SKSCState.swift */; };
+		77233E96278EBE0100685232 /* HumanRunningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E95278EBE0100685232 /* HumanRunningState.swift */; };
+		77233E98278EBE2500685232 /* HumanJumpingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E97278EBE2500685232 /* HumanJumpingState.swift */; };
+		77233E9A278EBE3700685232 /* HumanStandingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E99278EBE3700685232 /* HumanStandingState.swift */; };
+		77233E9C278EBE6F00685232 /* HumanAttackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E9B278EBE6F00685232 /* HumanAttackingState.swift */; };
+		77233E9E278EC0F000685232 /* HumanDeathState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E9D278EC0F000685232 /* HumanDeathState.swift */; };
+		77233EA2278ECC0400685232 /* HumanComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EA1278ECC0400685232 /* HumanComponent.swift */; };
+		77233EA4278ECD3E00685232 /* IntelligenceComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EA3278ECD3E00685232 /* IntelligenceComponent.swift */; };
+		77233EA6278ECD4A00685232 /* PlayerControlComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EA5278ECD4A00685232 /* PlayerControlComponent.swift */; };
+		77233EA9278ED59400685232 /* human_running.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 77233EA8278ED59400685232 /* human_running.atlas */; };
+		77233EAB278ED59A00685232 /* human_attack.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 77233EAA278ED59A00685232 /* human_attack.atlas */; };
+		77233EAF278EDE8F00685232 /* PlayerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EAE278EDE8F00685232 /* PlayerEntity.swift */; };
+		77233EB3278EDEC400685232 /* BadGuyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EB2278EDEC400685232 /* BadGuyEntity.swift */; };
+		77233EB5278EDF2D00685232 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EB4278EDF2D00685232 /* Game.swift */; };
+		77233EB9278F273F00685232 /* SKSpriteNode+Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EB8278F273F00685232 /* SKSpriteNode+Texture.swift */; };
+		77233EBC2791AE5E00685232 /* RenderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EBB2791AE5E00685232 /* RenderComponent.swift */; };
+		77233EBE2791AE6A00685232 /* PhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EBD2791AE6A00685232 /* PhysicsComponent.swift */; };
+		77233EC02791AE7700685232 /* AnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EBF2791AE7700685232 /* AnimationComponent.swift */; };
+		77233EC22791AF1000685232 /* DirectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EC12791AF1000685232 /* DirectionComponent.swift */; };
+		77233EC42791B32B00685232 /* ColliderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EC32791B32B00685232 /* ColliderType.swift */; };
+		77E02B66279DCCAF0034C48B /* ContactNotifiableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E02B65279DCCAF0034C48B /* ContactNotifiableType.swift */; };
+		77E02B68279DD3A20034C48B /* Untils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E02B67279DD3A20034C48B /* Untils.swift */; };
+		77E02B6A279DD5CD0034C48B /* GroundComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E02B69279DD5CD0034C48B /* GroundComponent.swift */; };
+		77E02B6C279DD8860034C48B /* ObstacleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E02B6B279DD8850034C48B /* ObstacleEntity.swift */; };
+		77E3018127998F0D00C86F42 /* PhysicsWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E3018027998F0D00C86F42 /* PhysicsWorld.swift */; };
+		77E3FCCA2799749400C86F42 /* RulesComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FCC92799749400C86F42 /* RulesComponent.swift */; };
+		77E3FCCC279974E400C86F42 /* MovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FCCB279974E400C86F42 /* MovementComponent.swift */; };
+		77E3FCCE279974EF00C86F42 /* AttackComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E3FCCD279974EE00C86F42 /* AttackComponent.swift */; };
 		77E61F1C27886116003EDFF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E61F1B27886116003EDFF1 /* AppDelegate.swift */; };
 		77E61F1E27886116003EDFF1 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77E61F1D27886116003EDFF1 /* GameScene.sks */; };
 		77E61F2027886116003EDFF1 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77E61F1F27886116003EDFF1 /* Actions.sks */; };
@@ -17,6 +45,8 @@
 		77E61F3427886118003EDFF1 /* SpriteKitShowCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E61F3327886118003EDFF1 /* SpriteKitShowCaseTests.swift */; };
 		77E61F3E27886118003EDFF1 /* SpriteKitShowCaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E61F3D27886118003EDFF1 /* SpriteKitShowCaseUITests.swift */; };
 		77E61F4027886118003EDFF1 /* SpriteKitShowCaseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E61F3F27886118003EDFF1 /* SpriteKitShowCaseUITestsLaunchTests.swift */; };
+		77E61F4D278865DE003EDFF1 /* SceneBlockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E61F4C278865DE003EDFF1 /* SceneBlockNode.swift */; };
+		77E61F4F278867D1003EDFF1 /* HumanNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E61F4E278867D1003EDFF1 /* HumanNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +67,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		77233E90278EBDC200685232 /* SKSCState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSCState.swift; sourceTree = "<group>"; };
+		77233E95278EBE0100685232 /* HumanRunningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanRunningState.swift; sourceTree = "<group>"; };
+		77233E97278EBE2500685232 /* HumanJumpingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanJumpingState.swift; sourceTree = "<group>"; };
+		77233E99278EBE3700685232 /* HumanStandingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanStandingState.swift; sourceTree = "<group>"; };
+		77233E9B278EBE6F00685232 /* HumanAttackingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanAttackingState.swift; sourceTree = "<group>"; };
+		77233E9D278EC0F000685232 /* HumanDeathState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanDeathState.swift; sourceTree = "<group>"; };
+		77233EA1278ECC0400685232 /* HumanComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanComponent.swift; sourceTree = "<group>"; };
+		77233EA3278ECD3E00685232 /* IntelligenceComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceComponent.swift; sourceTree = "<group>"; };
+		77233EA5278ECD4A00685232 /* PlayerControlComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlComponent.swift; sourceTree = "<group>"; };
+		77233EA8278ED59400685232 /* human_running.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = human_running.atlas; sourceTree = "<group>"; };
+		77233EAA278ED59A00685232 /* human_attack.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = human_attack.atlas; sourceTree = "<group>"; };
+		77233EAE278EDE8F00685232 /* PlayerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEntity.swift; sourceTree = "<group>"; };
+		77233EB2278EDEC400685232 /* BadGuyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadGuyEntity.swift; sourceTree = "<group>"; };
+		77233EB4278EDF2D00685232 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		77233EB8278F273F00685232 /* SKSpriteNode+Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+Texture.swift"; sourceTree = "<group>"; };
+		77233EBB2791AE5E00685232 /* RenderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderComponent.swift; sourceTree = "<group>"; };
+		77233EBD2791AE6A00685232 /* PhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsComponent.swift; sourceTree = "<group>"; };
+		77233EBF2791AE7700685232 /* AnimationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationComponent.swift; sourceTree = "<group>"; };
+		77233EC12791AF1000685232 /* DirectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionComponent.swift; sourceTree = "<group>"; };
+		77233EC32791B32B00685232 /* ColliderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColliderType.swift; sourceTree = "<group>"; };
+		77E02B65279DCCAF0034C48B /* ContactNotifiableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactNotifiableType.swift; sourceTree = "<group>"; };
+		77E02B67279DD3A20034C48B /* Untils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untils.swift; sourceTree = "<group>"; };
+		77E02B69279DD5CD0034C48B /* GroundComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundComponent.swift; sourceTree = "<group>"; };
+		77E02B6B279DD8850034C48B /* ObstacleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObstacleEntity.swift; sourceTree = "<group>"; };
+		77E3018027998F0D00C86F42 /* PhysicsWorld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsWorld.swift; sourceTree = "<group>"; };
+		77E3FCC92799749400C86F42 /* RulesComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesComponent.swift; sourceTree = "<group>"; };
+		77E3FCCB279974E400C86F42 /* MovementComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementComponent.swift; sourceTree = "<group>"; };
+		77E3FCCD279974EE00C86F42 /* AttackComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackComponent.swift; sourceTree = "<group>"; };
 		77E61F1827886116003EDFF1 /* SpriteKitShowCase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpriteKitShowCase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77E61F1B27886116003EDFF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77E61F1D27886116003EDFF1 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -51,6 +109,8 @@
 		77E61F3927886118003EDFF1 /* SpriteKitShowCaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpriteKitShowCaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77E61F3D27886118003EDFF1 /* SpriteKitShowCaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitShowCaseUITests.swift; sourceTree = "<group>"; };
 		77E61F3F27886118003EDFF1 /* SpriteKitShowCaseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitShowCaseUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		77E61F4C278865DE003EDFF1 /* SceneBlockNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneBlockNode.swift; sourceTree = "<group>"; };
+		77E61F4E278867D1003EDFF1 /* HumanNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +138,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		77233E92278EBDE000685232 /* HumanState */ = {
+			isa = PBXGroup;
+			children = (
+				77233E97278EBE2500685232 /* HumanJumpingState.swift */,
+				77233E95278EBE0100685232 /* HumanRunningState.swift */,
+				77233E99278EBE3700685232 /* HumanStandingState.swift */,
+				77233E9B278EBE6F00685232 /* HumanAttackingState.swift */,
+				77233E9D278EC0F000685232 /* HumanDeathState.swift */,
+			);
+			path = HumanState;
+			sourceTree = "<group>";
+		};
+		77233EA7278ECD6600685232 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				77233E92278EBDE000685232 /* HumanState */,
+				77233EA1278ECC0400685232 /* HumanComponent.swift */,
+				77233EA3278ECD3E00685232 /* IntelligenceComponent.swift */,
+				77233EA5278ECD4A00685232 /* PlayerControlComponent.swift */,
+				77233EBB2791AE5E00685232 /* RenderComponent.swift */,
+				77233EBD2791AE6A00685232 /* PhysicsComponent.swift */,
+				77E3FCCB279974E400C86F42 /* MovementComponent.swift */,
+				77E3FCCD279974EE00C86F42 /* AttackComponent.swift */,
+				77233EBF2791AE7700685232 /* AnimationComponent.swift */,
+				77233EC12791AF1000685232 /* DirectionComponent.swift */,
+				77E3FCC92799749400C86F42 /* RulesComponent.swift */,
+				77E02B69279DD5CD0034C48B /* GroundComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		77233EBA2791AE4500685232 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				77233EAE278EDE8F00685232 /* PlayerEntity.swift */,
+				77233EB2278EDEC400685232 /* BadGuyEntity.swift */,
+				77E02B6B279DD8850034C48B /* ObstacleEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		77E61F0F27886116003EDFF1 = {
 			isa = PBXGroup;
 			children = (
@@ -101,11 +202,24 @@
 		77E61F1A27886116003EDFF1 /* SpriteKitShowCase */ = {
 			isa = PBXGroup;
 			children = (
+				77233EAA278ED59A00685232 /* human_attack.atlas */,
+				77233EA8278ED59400685232 /* human_running.atlas */,
 				77E61F1B27886116003EDFF1 /* AppDelegate.swift */,
 				77E61F1D27886116003EDFF1 /* GameScene.sks */,
 				77E61F1F27886116003EDFF1 /* Actions.sks */,
 				77E61F2127886116003EDFF1 /* GameScene.swift */,
 				77E61F2327886116003EDFF1 /* ViewController.swift */,
+				77E61F4C278865DE003EDFF1 /* SceneBlockNode.swift */,
+				77233EB4278EDF2D00685232 /* Game.swift */,
+				77233E90278EBDC200685232 /* SKSCState.swift */,
+				77233EC32791B32B00685232 /* ColliderType.swift */,
+				77E02B65279DCCAF0034C48B /* ContactNotifiableType.swift */,
+				77E3018027998F0D00C86F42 /* PhysicsWorld.swift */,
+				77E02B67279DD3A20034C48B /* Untils.swift */,
+				77233EBA2791AE4500685232 /* Entities */,
+				77E61F4E278867D1003EDFF1 /* HumanNode.swift */,
+				77233EB8278F273F00685232 /* SKSpriteNode+Texture.swift */,
+				77233EA7278ECD6600685232 /* Components */,
 				77E61F2527886117003EDFF1 /* Assets.xcassets */,
 				77E61F2727886117003EDFF1 /* Main.storyboard */,
 				77E61F2A27886117003EDFF1 /* SpriteKitShowCase.entitlements */,
@@ -235,7 +349,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				77E61F1E27886116003EDFF1 /* GameScene.sks in Resources */,
+				77233EA9278ED59400685232 /* human_running.atlas in Resources */,
 				77E61F2627886117003EDFF1 /* Assets.xcassets in Resources */,
+				77233EAB278ED59A00685232 /* human_attack.atlas in Resources */,
 				77E61F2027886116003EDFF1 /* Actions.sks in Resources */,
 				77E61F2927886117003EDFF1 /* Main.storyboard in Resources */,
 			);
@@ -262,9 +378,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77233E9C278EBE6F00685232 /* HumanAttackingState.swift in Sources */,
+				77E02B66279DCCAF0034C48B /* ContactNotifiableType.swift in Sources */,
+				77E02B6A279DD5CD0034C48B /* GroundComponent.swift in Sources */,
 				77E61F2427886116003EDFF1 /* ViewController.swift in Sources */,
 				77E61F2227886116003EDFF1 /* GameScene.swift in Sources */,
+				77233E96278EBE0100685232 /* HumanRunningState.swift in Sources */,
+				77233EB9278F273F00685232 /* SKSpriteNode+Texture.swift in Sources */,
+				77E02B6C279DD8860034C48B /* ObstacleEntity.swift in Sources */,
+				77E3FCCC279974E400C86F42 /* MovementComponent.swift in Sources */,
+				77233EA6278ECD4A00685232 /* PlayerControlComponent.swift in Sources */,
 				77E61F1C27886116003EDFF1 /* AppDelegate.swift in Sources */,
+				77233EBE2791AE6A00685232 /* PhysicsComponent.swift in Sources */,
+				77E02B68279DD3A20034C48B /* Untils.swift in Sources */,
+				77233EB3278EDEC400685232 /* BadGuyEntity.swift in Sources */,
+				77233EC42791B32B00685232 /* ColliderType.swift in Sources */,
+				77E61F4D278865DE003EDFF1 /* SceneBlockNode.swift in Sources */,
+				77233EAF278EDE8F00685232 /* PlayerEntity.swift in Sources */,
+				77233EA4278ECD3E00685232 /* IntelligenceComponent.swift in Sources */,
+				77E3FCCA2799749400C86F42 /* RulesComponent.swift in Sources */,
+				77233EBC2791AE5E00685232 /* RenderComponent.swift in Sources */,
+				77233E91278EBDC200685232 /* SKSCState.swift in Sources */,
+				77233E98278EBE2500685232 /* HumanJumpingState.swift in Sources */,
+				77233E9E278EC0F000685232 /* HumanDeathState.swift in Sources */,
+				77233EB5278EDF2D00685232 /* Game.swift in Sources */,
+				77233E9A278EBE3700685232 /* HumanStandingState.swift in Sources */,
+				77233EC02791AE7700685232 /* AnimationComponent.swift in Sources */,
+				77E61F4F278867D1003EDFF1 /* HumanNode.swift in Sources */,
+				77233EA2278ECC0400685232 /* HumanComponent.swift in Sources */,
+				77233EC22791AF1000685232 /* DirectionComponent.swift in Sources */,
+				77E3FCCE279974EF00C86F42 /* AttackComponent.swift in Sources */,
+				77E3018127998F0D00C86F42 /* PhysicsWorld.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
