@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7714203C27A112A500EE0D5F /* AnimationWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7714203B27A112A500EE0D5F /* AnimationWorld.swift */; };
 		77233E91278EBDC200685232 /* SKSCState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E90278EBDC200685232 /* SKSCState.swift */; };
 		77233E96278EBE0100685232 /* HumanRunningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E95278EBE0100685232 /* HumanRunningState.swift */; };
 		77233E98278EBE2500685232 /* HumanJumpingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E97278EBE2500685232 /* HumanJumpingState.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7714203B27A112A500EE0D5F /* AnimationWorld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationWorld.swift; sourceTree = "<group>"; };
 		77233E90278EBDC200685232 /* SKSCState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSCState.swift; sourceTree = "<group>"; };
 		77233E95278EBE0100685232 /* HumanRunningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanRunningState.swift; sourceTree = "<group>"; };
 		77233E97278EBE2500685232 /* HumanJumpingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanJumpingState.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				77E02B65279DCCAF0034C48B /* ContactNotifiableType.swift */,
 				77E3018027998F0D00C86F42 /* PhysicsWorld.swift */,
 				77E02B67279DD3A20034C48B /* Untils.swift */,
+				7714203B27A112A500EE0D5F /* AnimationWorld.swift */,
 				77233EBA2791AE4500685232 /* Entities */,
 				77E61F4E278867D1003EDFF1 /* HumanNode.swift */,
 				77233EB8278F273F00685232 /* SKSpriteNode+Texture.swift */,
@@ -388,6 +391,7 @@
 				77E02B6C279DD8860034C48B /* ObstacleEntity.swift in Sources */,
 				77E3FCCC279974E400C86F42 /* MovementComponent.swift in Sources */,
 				77233EA6278ECD4A00685232 /* PlayerControlComponent.swift in Sources */,
+				7714203C27A112A500EE0D5F /* AnimationWorld.swift in Sources */,
 				77E61F1C27886116003EDFF1 /* AppDelegate.swift in Sources */,
 				77233EBE2791AE6A00685232 /* PhysicsComponent.swift in Sources */,
 				77E02B68279DD3A20034C48B /* Untils.swift in Sources */,
