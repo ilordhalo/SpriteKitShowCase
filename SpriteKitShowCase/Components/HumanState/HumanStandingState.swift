@@ -25,6 +25,8 @@ class HumanStandingState: GKState {
     }
     
     override func didEnter(from previousState: GKState?) {
-        humanComponent.stand()
+        super.didEnter(from: previousState)
+        
+//        humanComponent.stand()
     }
 }

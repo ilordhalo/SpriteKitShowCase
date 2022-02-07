@@ -1,14 +1,14 @@
 //
-//  ObstacleEntity.swift
+//  AbstractPhysicsEntity.swift
 //  SpriteKitShowCase
 //
-//  Created by zhangjiahao.me on 2022/1/24.
+//  Created by zhangjiahao.me on 2022/2/7.
 //
 
 import Foundation
 import GameplayKit
 
-class ObstacleEntity: GKEntity {
+class AbstractPhysicsEntity: GKEntity {
     var game: Game
     var node: SKSpriteNode
     
@@ -20,6 +20,7 @@ class ObstacleEntity: GKEntity {
         
         super.init()
         
+        node.entity = self
         setupComponents()
     }
     
@@ -28,7 +29,10 @@ class ObstacleEntity: GKEntity {
     }
     
     private func setupComponents() {
-        let renderComponent = RenderComponent(spriteNode: node)
-        addComponent(renderComponent)
+        let physicsComponent = PhysicsComponent(physicsBody: node.physicsBody!, colliderType: .Obstacle)
+        addComponent(physicsComponent)
+        
+        let groundComponent = GroundComponent()
+        addComponent(groundComponent)
     }
 }

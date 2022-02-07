@@ -10,4 +10,12 @@ import GameplayKit
 
 class AttackComponent: GKComponent {
     
+    var renderComponent: RenderComponent {
+        guard let renderComponent = entity?.component(ofType: RenderComponent.self) else {
+            fatalError("A HumanComponent's entity must have a RenderComponent")
+        }
+        return renderComponent
+    }
+    
+    
 }

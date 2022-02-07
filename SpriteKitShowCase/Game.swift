@@ -17,4 +17,6 @@ class Game {
     var playerNode: SKSpriteNode? {
         return gameScene?.childNode(withName: "player") as? SKSpriteNode
     }
+    
+    var animationWorld = AnimationWorld()
 }

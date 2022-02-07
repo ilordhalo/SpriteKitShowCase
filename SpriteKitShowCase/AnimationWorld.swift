@@ -8,20 +8,13 @@
 import Foundation
 import SpriteKit
 
-enum AnimationState: String {
-    case idle = "Idle"
-    case walkForward = "WalkForward"
-    case walkBackward = "WalkBackward"
-    case preAttack = "PreAttack"
-    case attack = "Attack"
-    case zapped = "Zapped"
-    case hit = "Hit"
-    case inactive = "Inactive"
-}
-
-enum AnimationIdentifier: String {
+enum AnimationIdentifier: String, CaseIterable {
     case humanRun = "human_run"
     case humanAttack = "human_attack"
+}
+
+enum AnimationActionKey: String {
+    case normal = "animation_action_key_normal"
 }
 
 /**
@@ -43,76 +36,88 @@ struct Animation {
 
     /// Whether this action's `textures` array should be repeated forever when animated.
     let repeatTexturesForever: Bool
-
-    /// The name of an optional action for this entity's body, loaded from an action file.
-    let bodyActionName: String?
-
-    /// The optional action for this entity's body, loaded from an action file.
-    let bodyAction: SKAction?
+    
+    let timePerFrame: TimeInterval
 }
 
 class AnimationFactory {
-    /// Returns the first texture in an atlas for a given `CompassDirection`.
-    class func firstTexture(atlas atlas: SKTextureAtlas, imageIdentifier identifier: String) -> SKTexture {
-        // Filter for this facing direction, and sort the resulting texture names alphabetically.
-        let textureNames = atlas.textureNames.filter {
-            $0.hasPrefix("\(identifier)_\(compassDirection.rawValue)_")
-        }.sorted()
+    
+    var atlasMap = [AnimationIdentifier: SKTextureAtlas]()
+    
+    func animation(identifier: AnimationIdentifier, repeatTexturesForever: Bool = true, timePerFrame: TimeInterval = 0.1) -> Animation {
         
-        // Find and return the first texture for this direction.
-        return atlas.textureNamed(atlas.textureNames.first)
-    }
-    
-    /// Creates a texture action from all textures in an atlas.
-    class func actionForAllTexturesInAtlas(atlas: SKTextureAtlas) -> SKAction {
-        // Sort the texture names alphabetically, and map them to an array of actual textures.
-        let textures = atlas.textureNames.sorted().map {
-            atlas.textureNamed($0)
+        guard let atlas = atlasMap[identifier] else {
+            fatalError("Should load atlas first")
         }
-
-        // Create an appropriate action for these textures.
-        if textures.count == 1 {
-            return SKAction.setTexture(textures.first!)
-        }
-        else {
-            let texturesAction = SKAction.animate(with: textures, timePerFrame: AnimationComponent.timePerFrame)
-            return SKAction.repeatForever(texturesAction)
-        }
-    }
-    
-    class func animation(identifier identifier: AnimationIdentifier, bodyActionName: String? = nil, repeatTexturesForever: Bool = true) -> Animation {
-
-        let bodyAction: SKAction?
-        if let name = bodyActionName {
-            bodyAction = SKAction(named: name)
-        } else {
-            bodyAction = nil
-        }
-            
+        
         // Find all matching texture names, sorted alphabetically, and map them to an array of actual textures.
-        let textures = atlas.textureNames.filter {
-            $0.hasPrefix("\(identifier)_\(compassDirection.rawValue)_")
-        }.sorted {
-            playBackwards ? $0 > $1 : $0 < $1
-        }.map {
-            atlas.textureNamed($0)
+        let textures = atlas.textureNames.sorted().map { name in
+            return atlas.textureNamed(name)
         }
         
         // Create a new `Animation` for these settings.
-        let animation = Animation(
-            animationState: animationState,
-            direction: compassDirection,
-            textures: textures,
-            frameOffset: 0,
-            repeatTexturesForever: repeatTexturesForever,
-            bodyActionName: bodyActionName,
-            bodyAction: bodyAction
-        )
+        let animation = Animation(identifier: identifier, direction: Direction.right, textures: textures, repeatTexturesForever: repeatTexturesForever, timePerFrame: timePerFrame)
     
         return animation
     }
+    
+    func loadTextureAtlasIfNeeded(identifiers: [AnimationIdentifier], completion: @escaping (Bool) -> Void) {
+        var preloadIdentifiers = [AnimationIdentifier]()
+        for identifier in identifiers {
+            if (atlasMap[identifier] == nil) {
+                preloadIdentifiers.append(identifier)
+            }
+        }
+        
+        if (preloadIdentifiers.isEmpty) {
+            completion(true)
+            return
+        }
+        
+        let names = preloadIdentifiers.map { identifier in
+            return identifier.rawValue
+        }
+        
+        SKTextureAtlas.preloadTextureAtlasesNamed(names) { error, atlases in
+            if let error = error {
+                fatalError("One or more texture atlases could not be found: \(error)")
+            }
+            
+            for (index, atlas) in atlases.enumerated() {
+                self.atlasMap[preloadIdentifiers[index]] = atlas
+            }
+            
+            completion(true)
+        }
+    }
+    
+    func loadAllTextureAtlasIfNeeded(completion: @escaping (Bool) -> Void) {
+        let identifiers = AnimationIdentifier.allCases
+        loadTextureAtlasIfNeeded(identifiers: identifiers) { success in
+            completion(success)
+        }
+    }
 }
 
-struct AnimationWorld {
+class AnimationWorld {
     
+    // MARK: Properties
+    
+    var factory = AnimationFactory()
+    var animations = [String: Animation]()
+    
+    func loadAllAnimations(completion: (Bool) -> Void) {
+        factory.loadAllTextureAtlasIfNeeded { success in
+            self.loadHumanAnimations()
+        }
+    }
+    
+    private func loadHumanAnimations() {
+        
+        let humanRun = factory.animation(identifier: AnimationIdentifier.humanRun, repeatTexturesForever: true, timePerFrame: 0.1)
+        animations[AnimationIdentifier.humanRun.rawValue] = humanRun
+        
+        let humanAttack = factory.animation(identifier: AnimationIdentifier.humanAttack, repeatTexturesForever: true, timePerFrame: 0.1)
+        animations[AnimationIdentifier.humanAttack.rawValue] = humanAttack
+    }
 }

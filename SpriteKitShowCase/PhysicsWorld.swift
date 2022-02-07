@@ -10,9 +10,11 @@ import Foundation
 struct PhysicsWorld {
     struct Entities {
         struct Human {
-            static let bodySize: CGSize = CGSize(width: 19, height: 59)
+            static let bodySize: CGSize = CGSize(width: 10, height: 30)
             static let mass: CGFloat = 1
-            static let jumpVector: CGVector = CGVector(dx: 0, dy: -2000)
+            static let jumpVector: CGVector = CGVector(dx: 0, dy: -5000)
+            static let runVelocity: CGFloat = 100
+            static let friction: CGFloat = 0.0
         }
         struct Obstacle {
         }

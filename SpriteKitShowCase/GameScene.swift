@@ -14,8 +14,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return Game.shared
     }
     
+    lazy var componentSystems: [GKComponentSystem] = {
+        return [playerControlComponentSystem, humanComponentSystem, directionComponentSystem, animationComponentSystem]
+    }()
+    
     let humanComponentSystem = GKComponentSystem(componentClass: HumanComponent.self)
     let playerControlComponentSystem = GKComponentSystem(componentClass: PlayerControlComponent.self)
+    let animationComponentSystem = GKComponentSystem(componentClass: AnimationComponent.self)
+    let directionComponentSystem = GKComponentSystem(componentClass: DirectionComponent.self)
     
     var entities = [GKEntity]()
     var player: PlayerEntity?
@@ -24,12 +30,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         super.init(coder: aDecoder)
         
         game.gameScene = self
+        game.animationWorld.loadAllAnimations { success in
+        }
     }
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
+        setupPhysicsBody()
         setupEntities()
         addComponentsToComponentSystems()
+    }
+    
+    func setupPhysicsBody() {
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        self.physicsBody?.isDynamic = false
+        self.physicsBody?.categoryBitMask = ColliderType.Obstacle.rawValue
     }
     
     func setupEntities() {
@@ -43,16 +58,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             index += 1
         }
         
-        if let node = self.childNode(withName: "ground") as? SKSpriteNode {
-            let entity = ObstacleEntity(game: game, node: node)
+        index = 0
+        while let node = self.childNode(withName: "abstract_physics_" + String(index)) as? SKSpriteNode {
+            let entity = AbstractPhysicsEntity(game: game, node: node)
             entities.append(entity)
+            index += 1
         }
     }
     
     func addComponentsToComponentSystems() {
         for entity in entities {
-            humanComponentSystem.addComponent(foundIn: entity)
-            playerControlComponentSystem.addComponent(foundIn: entity)
+            for componentSystem in componentSystems {
+                componentSystem.addComponent(foundIn: entity)
+            }
         }
     }
     
@@ -71,9 +89,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    override func keyUp(with event: NSEvent) {
+        for case let component as PlayerControlComponent in playerControlComponentSystem.components {
+            component.keyUp(with: event)
+        }
+    }
+    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+        
+        for componentSystem in componentSystems {
+            componentSystem.update(deltaTime: currentTime)
+        }
     }
     
     // MARK: SKPhysicsContactDelegate

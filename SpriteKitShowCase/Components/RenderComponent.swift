@@ -8,6 +8,14 @@
 import Foundation
 import GameplayKit
 
+class SpriteNode: SKSpriteNode {
+    override var size: CGSize {
+        didSet {
+            
+        }
+    }
+}
+
 class RenderComponent: GKComponent {
     
     var spriteNode: SKSpriteNode

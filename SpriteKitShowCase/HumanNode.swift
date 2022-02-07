@@ -10,9 +10,5 @@ import SpriteKit
 
 class HumanNode: SKSpriteNode {
     
-    func jump() {
-        let jumpVector = CGVector(dx: 0, dy: -200)
-        self.physicsBody?.applyImpulse(jumpVector)
-    }
-    
+    var fuck: String?
 }

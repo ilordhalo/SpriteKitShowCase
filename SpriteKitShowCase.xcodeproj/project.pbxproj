@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		770EA99727B0CF6800369472 /* HumanFallingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770EA99627B0CF6800369472 /* HumanFallingState.swift */; };
+		770EA99927B10B2C00369472 /* AbstractPhysicsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770EA99827B10B2C00369472 /* AbstractPhysicsEntity.swift */; };
 		7714203C27A112A500EE0D5F /* AnimationWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7714203B27A112A500EE0D5F /* AnimationWorld.swift */; };
 		77233E91278EBDC200685232 /* SKSCState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E90278EBDC200685232 /* SKSCState.swift */; };
 		77233E96278EBE0100685232 /* HumanRunningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233E95278EBE0100685232 /* HumanRunningState.swift */; };
@@ -17,8 +19,6 @@
 		77233EA2278ECC0400685232 /* HumanComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EA1278ECC0400685232 /* HumanComponent.swift */; };
 		77233EA4278ECD3E00685232 /* IntelligenceComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EA3278ECD3E00685232 /* IntelligenceComponent.swift */; };
 		77233EA6278ECD4A00685232 /* PlayerControlComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EA5278ECD4A00685232 /* PlayerControlComponent.swift */; };
-		77233EA9278ED59400685232 /* human_running.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 77233EA8278ED59400685232 /* human_running.atlas */; };
-		77233EAB278ED59A00685232 /* human_attack.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 77233EAA278ED59A00685232 /* human_attack.atlas */; };
 		77233EAF278EDE8F00685232 /* PlayerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EAE278EDE8F00685232 /* PlayerEntity.swift */; };
 		77233EB3278EDEC400685232 /* BadGuyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EB2278EDEC400685232 /* BadGuyEntity.swift */; };
 		77233EB5278EDF2D00685232 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EB4278EDF2D00685232 /* Game.swift */; };
@@ -68,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		770EA99627B0CF6800369472 /* HumanFallingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanFallingState.swift; sourceTree = "<group>"; };
+		770EA99827B10B2C00369472 /* AbstractPhysicsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractPhysicsEntity.swift; sourceTree = "<group>"; };
 		7714203B27A112A500EE0D5F /* AnimationWorld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationWorld.swift; sourceTree = "<group>"; };
 		77233E90278EBDC200685232 /* SKSCState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSCState.swift; sourceTree = "<group>"; };
 		77233E95278EBE0100685232 /* HumanRunningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanRunningState.swift; sourceTree = "<group>"; };
@@ -78,8 +80,6 @@
 		77233EA1278ECC0400685232 /* HumanComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanComponent.swift; sourceTree = "<group>"; };
 		77233EA3278ECD3E00685232 /* IntelligenceComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligenceComponent.swift; sourceTree = "<group>"; };
 		77233EA5278ECD4A00685232 /* PlayerControlComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlComponent.swift; sourceTree = "<group>"; };
-		77233EA8278ED59400685232 /* human_running.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = human_running.atlas; sourceTree = "<group>"; };
-		77233EAA278ED59A00685232 /* human_attack.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = human_attack.atlas; sourceTree = "<group>"; };
 		77233EAE278EDE8F00685232 /* PlayerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEntity.swift; sourceTree = "<group>"; };
 		77233EB2278EDEC400685232 /* BadGuyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadGuyEntity.swift; sourceTree = "<group>"; };
 		77233EB4278EDF2D00685232 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -148,6 +148,7 @@
 				77233E99278EBE3700685232 /* HumanStandingState.swift */,
 				77233E9B278EBE6F00685232 /* HumanAttackingState.swift */,
 				77233E9D278EC0F000685232 /* HumanDeathState.swift */,
+				770EA99627B0CF6800369472 /* HumanFallingState.swift */,
 			);
 			path = HumanState;
 			sourceTree = "<group>";
@@ -177,6 +178,7 @@
 				77233EAE278EDE8F00685232 /* PlayerEntity.swift */,
 				77233EB2278EDEC400685232 /* BadGuyEntity.swift */,
 				77E02B6B279DD8850034C48B /* ObstacleEntity.swift */,
+				770EA99827B10B2C00369472 /* AbstractPhysicsEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -204,8 +206,6 @@
 		77E61F1A27886116003EDFF1 /* SpriteKitShowCase */ = {
 			isa = PBXGroup;
 			children = (
-				77233EAA278ED59A00685232 /* human_attack.atlas */,
-				77233EA8278ED59400685232 /* human_running.atlas */,
 				77E61F1B27886116003EDFF1 /* AppDelegate.swift */,
 				77E61F1D27886116003EDFF1 /* GameScene.sks */,
 				77E61F1F27886116003EDFF1 /* Actions.sks */,
@@ -352,9 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77E61F1E27886116003EDFF1 /* GameScene.sks in Resources */,
-				77233EA9278ED59400685232 /* human_running.atlas in Resources */,
 				77E61F2627886117003EDFF1 /* Assets.xcassets in Resources */,
-				77233EAB278ED59A00685232 /* human_attack.atlas in Resources */,
 				77E61F2027886116003EDFF1 /* Actions.sks in Resources */,
 				77E61F2927886117003EDFF1 /* Main.storyboard in Resources */,
 			);
@@ -403,12 +401,14 @@
 				77E3FCCA2799749400C86F42 /* RulesComponent.swift in Sources */,
 				77233EBC2791AE5E00685232 /* RenderComponent.swift in Sources */,
 				77233E91278EBDC200685232 /* SKSCState.swift in Sources */,
+				770EA99927B10B2C00369472 /* AbstractPhysicsEntity.swift in Sources */,
 				77233E98278EBE2500685232 /* HumanJumpingState.swift in Sources */,
 				77233E9E278EC0F000685232 /* HumanDeathState.swift in Sources */,
 				77233EB5278EDF2D00685232 /* Game.swift in Sources */,
 				77233E9A278EBE3700685232 /* HumanStandingState.swift in Sources */,
 				77233EC02791AE7700685232 /* AnimationComponent.swift in Sources */,
 				77E61F4F278867D1003EDFF1 /* HumanNode.swift in Sources */,
+				770EA99727B0CF6800369472 /* HumanFallingState.swift in Sources */,
 				77233EA2278ECC0400685232 /* HumanComponent.swift in Sources */,
 				77233EC22791AF1000685232 /* DirectionComponent.swift in Sources */,
 				77E3FCCE279974EF00C86F42 /* AttackComponent.swift in Sources */,

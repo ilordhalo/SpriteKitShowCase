@@ -73,6 +73,7 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
         physicsBody.isDynamic = true
         physicsBody.affectedByGravity = true
         physicsBody.allowsRotation = false
+        physicsBody.friction = PhysicsWorld.Entities.Human.friction
         return physicsBody
     }
     
@@ -97,9 +98,10 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
     // MARK: ContactNotifiableType
     
     func contactWithEntityDidBegin(_ entity: GKEntity, contact: SKPhysicsContact) {
-        if (contact.contactNormal.dy > 0 && entity.component(ofType: GroundComponent.self) != nil) {
+        if (contact.contactNormal.dy < 0 && entity.component(ofType: GroundComponent.self) != nil) {
             humanComponent.hitTheGround()
         }
+        print("contactNormal:\(contact.contactNormal)")
     }
     
     func contactWithEntityDidEnd(_ entity: GKEntity, contack: SKPhysicsContact) {

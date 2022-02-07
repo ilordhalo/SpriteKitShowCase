@@ -15,7 +15,18 @@ class HumanRunningState: GKState {
         self.entity = entity
     }
     
+    // MARK: Components Getter
+    
+    var humanComponent: HumanComponent {
+        guard let humanComponent = entity.component(ofType: HumanComponent.self) else {
+            fatalError("HumanJumpingState's entity must have an HumanComponent.")
+        }
+        return humanComponent
+    }
+    
     override func didEnter(from previousState: GKState?) {
+        super.didEnter(from: previousState)
         
+//        humanComponent.run()
     }
 }

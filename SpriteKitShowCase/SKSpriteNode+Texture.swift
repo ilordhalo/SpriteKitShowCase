@@ -10,9 +10,10 @@ import SpriteKit
 
 extension SKSpriteNode {
     func setTexture(texture: SKTexture, resize: Bool) {
-        self.texture = texture
-        if (resize) {
-            self.size = CGSize(width: texture.size().width * 2, height: texture.size().height * 2)
-        }
+//        self.texture = texture
+        self.run(SKAction.setTexture(texture, resize: true))
+//        if (resize) {
+//            self.size = CGSize(width: texture.size().width * 2, height: texture.size().height * 2)
+//        }
     }
 }
