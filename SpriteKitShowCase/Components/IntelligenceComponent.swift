@@ -9,5 +9,5 @@ import Foundation
 import GameplayKit
 
 class IntelligenceComponent: GKComponent {
-    
+    // 1. 
 }

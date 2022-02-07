@@ -68,19 +68,17 @@ class HumanComponent: GKComponent {
     // MARK: Update Action
     
     private func jump() {
-        physicsComponent.physicsBody.applyImpulse(PhysicsWorld.Entities.Human.jumpVector)
+        animationComponent.removeAnimation()
         renderComponent.spriteNode.setTexture(texture: SKTexture(imageNamed: "human_jumping"), resize: true)
     }
     
     private func stand() {
-        physicsComponent.physicsBody.velocity.dx = 0
         animationComponent.removeAnimation()
         renderComponent.spriteNode.setTexture(texture: SKTexture(imageNamed: "human"), resize: true)
     }
     
     private func run() {
         animationComponent.requestedAnimationIdentifier = AnimationIdentifier.humanRun
-        physicsComponent.physicsBody.velocity.dx = PhysicsWorld.Entities.Human.runVelocity * directionComponent.K
     }
     
     override func update(deltaTime seconds: TimeInterval) {
