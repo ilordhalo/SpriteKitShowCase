@@ -10,7 +10,9 @@ import SpriteKit
 
 enum AnimationIdentifier: String, CaseIterable {
     case humanRun = "human_run"
-    case humanAttack = "human_attack"
+    case humanAttackHit = "human_attack_hit"
+    case humanAttackHardHit = "human_attack_hardhit"
+    case humanAttackKick = "human_attack_kick"
 }
 
 enum AnimationActionKey: String {
@@ -117,7 +119,13 @@ class AnimationWorld {
         let humanRun = factory.animation(identifier: AnimationIdentifier.humanRun, repeatTexturesForever: true, timePerFrame: 0.1)
         animations[AnimationIdentifier.humanRun.rawValue] = humanRun
         
-        let humanAttack = factory.animation(identifier: AnimationIdentifier.humanAttack, repeatTexturesForever: true, timePerFrame: 0.1)
-        animations[AnimationIdentifier.humanAttack.rawValue] = humanAttack
+        let humanAttackHit = factory.animation(identifier: AnimationIdentifier.humanAttackHit, repeatTexturesForever: false, timePerFrame: 0.1)
+        animations[AnimationIdentifier.humanAttackHit.rawValue] = humanAttackHit
+        
+        let humanAttackHardHit = factory.animation(identifier: AnimationIdentifier.humanAttackHardHit, repeatTexturesForever: false, timePerFrame: 0.1)
+        animations[AnimationIdentifier.humanAttackHardHit.rawValue] = humanAttackHardHit
+        
+        let humanAttackKick = factory.animation(identifier: AnimationIdentifier.humanAttackKick, repeatTexturesForever: false, timePerFrame: 0.1)
+        animations[AnimationIdentifier.humanAttackKick.rawValue] = humanAttackKick
     }
 }
