@@ -69,7 +69,11 @@ class AnimationComponent: GKComponent {
         if animation.repeatTexturesForever {
             renderComponent.spriteNode.run(SKAction.repeatForever(action), withKey: AnimationActionKey.normal.rawValue)
         } else {
-            renderComponent.spriteNode.run(action, withKey: AnimationActionKey.normal.rawValue)
+            let completion = SKAction.run {
+                self.removeAnimation()
+            }
+            let sequence = SKAction.sequence([action, completion])
+            renderComponent.spriteNode.run(sequence, withKey: AnimationActionKey.normal.rawValue)
         }
         
         renderComponent.spriteNode.setTexture(texture: animation.textures.first!, resize: true)

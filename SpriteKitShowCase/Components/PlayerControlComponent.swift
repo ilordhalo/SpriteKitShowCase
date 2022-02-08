@@ -97,10 +97,16 @@ class PlayerControlComponent: GKComponent {
         return physicsComponent
     }
     
+    var attackComponent: AttackComponent {
+        guard let attackComponent = entity?.component(ofType: AttackComponent.self) else {
+            fatalError("A PlayerControlComponent's entity must have a AttackComponent")
+        }
+        return attackComponent
+    }
+    
     // MARK: Public
     
     func keyDown(with event: NSEvent) {
-        print("down")
         addCommand(command: PlayerCommand(keyCode: Int(event.keyCode), eventType: .keyDown))
 //        switch event.keyCode {
 //        case 0x31:
@@ -155,7 +161,7 @@ class PlayerControlComponent: GKComponent {
             physicsComponent.physicsBody.velocity.dx = PhysicsWorld.Entities.Human.runVelocity * directionComponent.K
             humanComponent.stateMachine.enter(HumanRunningState.self)
         case .attack:
-            break
+            attackComponent.requestedAttack = true
         case .stopGoLeft, .stopGoRight:
             physicsComponent.physicsBody.velocity.dx = 0
             humanComponent.stateMachine.enter(HumanStandingState.self)

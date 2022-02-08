@@ -15,13 +15,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     lazy var componentSystems: [GKComponentSystem] = {
-        return [playerControlComponentSystem, humanComponentSystem, directionComponentSystem, animationComponentSystem]
+        return [playerControlComponentSystem, humanComponentSystem, directionComponentSystem, animationComponentSystem, attackComponentSystem]
     }()
     
     let humanComponentSystem = GKComponentSystem(componentClass: HumanComponent.self)
     let playerControlComponentSystem = GKComponentSystem(componentClass: PlayerControlComponent.self)
     let animationComponentSystem = GKComponentSystem(componentClass: AnimationComponent.self)
     let directionComponentSystem = GKComponentSystem(componentClass: DirectionComponent.self)
+    let attackComponentSystem = GKComponentSystem(componentClass: AttackComponent.self)
     
     var entities = [GKEntity]()
     var player: PlayerEntity?
