@@ -28,12 +28,10 @@ class PhysicsComponent: GKComponent {
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
         
-        if self.physicsBody.velocity.dy < 0 {
+        if self.physicsBody.velocity.dy != 0 {
             onTheGround = false
-        } else if self.physicsBody.velocity.dy == 0 {
+        } else {
             onTheGround = true
         }
-        
-        print("velocity: \(self.physicsBody.velocity)")
     }
 }

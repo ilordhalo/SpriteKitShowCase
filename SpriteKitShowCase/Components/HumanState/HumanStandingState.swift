@@ -37,4 +37,11 @@ class HumanStandingState: GKState {
         animationComponent.removeAnimation()
         renderComponent.spriteNode.setTexture(texture: SKTexture(imageNamed: "human"), resize: true)
     }
+    
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        if stateClass == HumanStandingState.self {
+            return false
+        }
+        return true
+    }
 }

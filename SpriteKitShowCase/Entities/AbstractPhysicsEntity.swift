@@ -29,6 +29,7 @@ class AbstractPhysicsEntity: GKEntity {
     }
     
     private func setupComponents() {
+        node.physicsBody!.restitution = PhysicsWorld.Entities.AbstractPhysics.restitution
         let physicsComponent = PhysicsComponent(physicsBody: node.physicsBody!, colliderType: .Obstacle)
         addComponent(physicsComponent)
         

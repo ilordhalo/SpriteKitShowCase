@@ -125,25 +125,17 @@ class PlayerControlComponent: GKComponent {
         case .jump:
             if physicsComponent.onTheGround {
                 physicsComponent.physicsBody.applyImpulse(PhysicsWorld.Entities.Human.jumpVector)
-//                humanComponent.stateMachine.enter(HumanJumpingState.self)
-                humanComponent.requestedState = HumanJumpingState.self
             }
         case .goLeft:
             directionComponent.requestedDirection = .left
             physicsComponent.physicsBody.velocity.dx = PhysicsWorld.Entities.Human.runVelocity * directionComponent.K
-//            humanComponent.stateMachine.enter(HumanRunningState.self)
-            humanComponent.requestedState = HumanRunningState.self
         case .goRight:
             directionComponent.requestedDirection = .right
             physicsComponent.physicsBody.velocity.dx = PhysicsWorld.Entities.Human.runVelocity * directionComponent.K
-//            humanComponent.stateMachine.enter(HumanRunningState.self)
-            humanComponent.requestedState = HumanRunningState.self
         case .attack:
             attackComponent.requestedAttack = true
         case .stopGoLeft, .stopGoRight:
             physicsComponent.physicsBody.velocity.dx = 0
-//            humanComponent.stateMachine.enter(HumanStandingState.self)
-            humanComponent.requestedState = HumanStandingState.self
         default:
             break
         }

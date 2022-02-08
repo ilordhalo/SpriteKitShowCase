@@ -68,10 +68,6 @@ class HumanComponent: GKComponent {
                 stateMachine.enter(HumanRunningState.self)
             } else {
                 stateMachine.enter(HumanStandingState.self)
-//                if (requestedState != nil) {
-//                    stateMachine.enter(requestedState!.self)
-//                    requestedState = nil
-//                }
             }
             
         }

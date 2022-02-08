@@ -73,6 +73,7 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
         physicsBody.isDynamic = true
         physicsBody.affectedByGravity = true
         physicsBody.allowsRotation = false
+        physicsBody.restitution = PhysicsWorld.Entities.Human.restitution
         physicsBody.friction = PhysicsWorld.Entities.Human.friction
         return physicsBody
     }

@@ -65,6 +65,7 @@ class AttackComponent: GKComponent {
     }
     
     private func enterNextAttack() {
+        print("enter")
         if attackState == nil {
             enter(state: .hit)
         } else {
