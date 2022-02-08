@@ -10,6 +10,7 @@ import GameplayKit
 
 class PhysicsComponent: GKComponent {
     var physicsBody: SKPhysicsBody
+    private(set) var onTheGround: Bool = true
     
     init(physicsBody: SKPhysicsBody, colliderType: ColliderType) {
         self.physicsBody = physicsBody
@@ -22,5 +23,17 @@ class PhysicsComponent: GKComponent {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func update(deltaTime seconds: TimeInterval) {
+        super.update(deltaTime: seconds)
+        
+        if self.physicsBody.velocity.dy < 0 {
+            onTheGround = false
+        } else if self.physicsBody.velocity.dy == 0 {
+            onTheGround = true
+        }
+        
+        print("velocity: \(self.physicsBody.velocity)")
     }
 }

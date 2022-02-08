@@ -25,18 +25,11 @@ class HumanJumpingState: GKState {
         return animationComponent
     }
     
-    var renderCompnent: RenderComponent {
+    var renderComponent: RenderComponent {
         guard let renderComponent = entity.component(ofType: RenderComponent.self) else {
             fatalError("HumanJumpingState's entity must have an RenderComponent.")
         }
         return renderComponent
-    }
-    
-    var humanComponent: HumanComponent {
-        guard let humanComponent = entity.component(ofType: HumanComponent.self) else {
-            fatalError("HumanJumpingState's entity must have an HumanComponent.")
-        }
-        return humanComponent
     }
     
     // MARK: GKState Life Cycle
@@ -44,11 +37,12 @@ class HumanJumpingState: GKState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-//        humanComponent.jump()
+        animationComponent.removeAnimation()
+        renderComponent.spriteNode.setTexture(texture: SKTexture(imageNamed: "human_jumping"), resize: true)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        if (stateClass == HumanJumpingState.self) {
+        if stateClass == HumanJumpingState.self {
             return false
         }
         return true

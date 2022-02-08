@@ -93,15 +93,21 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
         return humanComponent
     }
     
+    var physicsComponent: PhysicsComponent {
+        guard let physicsComponent = self.component(ofType: PhysicsComponent.self) else {
+            fatalError("PlayerEntity must have an PhysicsComponent.")
+        }
+        return physicsComponent
+    }
+    
     // MARK: Public
     
     // MARK: ContactNotifiableType
     
     func contactWithEntityDidBegin(_ entity: GKEntity, contact: SKPhysicsContact) {
         if (contact.contactNormal.dy < 0 && entity.component(ofType: GroundComponent.self) != nil) {
-            humanComponent.hitTheGround()
+            // hit the ground
         }
-        print("contactNormal:\(contact.contactNormal)")
     }
     
     func contactWithEntityDidEnd(_ entity: GKEntity, contack: SKPhysicsContact) {

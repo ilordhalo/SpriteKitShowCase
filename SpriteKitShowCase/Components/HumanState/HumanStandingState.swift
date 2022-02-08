@@ -17,16 +17,24 @@ class HumanStandingState: GKState {
     
     // MARK: Components Getter
     
-    var humanComponent: HumanComponent {
-        guard let humanComponent = entity.component(ofType: HumanComponent.self) else {
-            fatalError("HumanJumpingState's entity must have an HumanComponent.")
+    var animationComponent: AnimationComponent {
+        guard let animationComponent = entity.component(ofType: AnimationComponent.self) else {
+            fatalError("HumanStandingState's entity must have an AnimationComponent.")
         }
-        return humanComponent
+        return animationComponent
+    }
+    
+    var renderComponent: RenderComponent {
+        guard let renderComponent = entity.component(ofType: RenderComponent.self) else {
+            fatalError("HumanStandingState's entity must have an RenderComponent.")
+        }
+        return renderComponent
     }
     
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-//        humanComponent.stand()
+        animationComponent.removeAnimation()
+        renderComponent.spriteNode.setTexture(texture: SKTexture(imageNamed: "human"), resize: true)
     }
 }

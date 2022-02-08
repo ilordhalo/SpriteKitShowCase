@@ -102,37 +102,10 @@ class PlayerControlComponent: GKComponent {
     func keyDown(with event: NSEvent) {
         print("down")
         addCommand(command: PlayerCommand(keyCode: Int(event.keyCode), eventType: .keyDown))
-//        switch event.keyCode {
-//        case 0x31:
-//            break;
-//        case 13:
-//            // w
-//            humanComponent.stateMachine.enter(HumanJumpingState.self)
-//            break;
-//        case 2:
-//            // d
-//            directionComponent.requestedDirection = .right
-//            humanComponent.stateMachine.enter(HumanRunningState.self)
-//        case 0:
-//            // a
-//            directionComponent.requestedDirection = .left
-//            humanComponent.stateMachine.enter(HumanRunningState.self)
-//            break;
-//        default:
-//            print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
-//        }
     }
     
     func keyUp(with event: NSEvent) {
             addCommand(command: PlayerCommand(keyCode: Int(event.keyCode), eventType: .keyUp))
-//        switch event.keyCode {
-//        case 0, 2:
-//            // a, d
-//            humanComponent.stateMachine.enter(HumanStandingState.self)
-//            break;
-//        default:
-//            print("keyDown: \(event.characters!) keyCode: \(event.keyCode)")
-//        }
     }
     
     private func addCommand(command: PlayerCommand) {
@@ -144,21 +117,27 @@ class PlayerControlComponent: GKComponent {
     private func handleCommand(command: PlayerCommand) {
         switch command.commandType {
         case .jump:
-            physicsComponent.physicsBody.applyImpulse(PhysicsWorld.Entities.Human.jumpVector)
-            humanComponent.stateMachine.enter(HumanJumpingState.self)
+            if physicsComponent.onTheGround {
+                physicsComponent.physicsBody.applyImpulse(PhysicsWorld.Entities.Human.jumpVector)
+//                humanComponent.stateMachine.enter(HumanJumpingState.self)
+                humanComponent.requestedState = HumanJumpingState.self
+            }
         case .goLeft:
             directionComponent.requestedDirection = .left
             physicsComponent.physicsBody.velocity.dx = PhysicsWorld.Entities.Human.runVelocity * directionComponent.K
-            humanComponent.stateMachine.enter(HumanRunningState.self)
+//            humanComponent.stateMachine.enter(HumanRunningState.self)
+            humanComponent.requestedState = HumanRunningState.self
         case .goRight:
             directionComponent.requestedDirection = .right
             physicsComponent.physicsBody.velocity.dx = PhysicsWorld.Entities.Human.runVelocity * directionComponent.K
-            humanComponent.stateMachine.enter(HumanRunningState.self)
+//            humanComponent.stateMachine.enter(HumanRunningState.self)
+            humanComponent.requestedState = HumanRunningState.self
         case .attack:
             break
         case .stopGoLeft, .stopGoRight:
             physicsComponent.physicsBody.velocity.dx = 0
-            humanComponent.stateMachine.enter(HumanStandingState.self)
+//            humanComponent.stateMachine.enter(HumanStandingState.self)
+            humanComponent.requestedState = HumanStandingState.self
         default:
             break
         }

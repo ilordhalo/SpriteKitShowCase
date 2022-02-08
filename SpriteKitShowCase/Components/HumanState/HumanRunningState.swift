@@ -17,16 +17,23 @@ class HumanRunningState: GKState {
     
     // MARK: Components Getter
     
-    var humanComponent: HumanComponent {
-        guard let humanComponent = entity.component(ofType: HumanComponent.self) else {
-            fatalError("HumanJumpingState's entity must have an HumanComponent.")
+    var animationComponent: AnimationComponent {
+        guard let animationComponent = entity.component(ofType: AnimationComponent.self) else {
+            fatalError("HumanRunningState's entity must have an AnimationComponent.")
         }
-        return humanComponent
+        return animationComponent
     }
     
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
-//        humanComponent.run()
+        animationComponent.requestedAnimationIdentifier = AnimationIdentifier.humanRun
+    }
+    
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        if stateClass == HumanRunningState.self {
+            return false
+        }
+        return true
     }
 }
