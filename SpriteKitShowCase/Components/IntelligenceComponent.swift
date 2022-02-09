@@ -9,5 +9,19 @@ import Foundation
 import GameplayKit
 
 class IntelligenceComponent: GKComponent {
-    // 1. 
+    let stateMachine: GKStateMachine
+    
+    var requestedState: GKState.Type?
+    
+    init(states: [GKState]) {
+        stateMachine = GKStateMachine(states: states)
+        
+        stateMachine.enter(BadGuyPatrolState.self)
+        
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

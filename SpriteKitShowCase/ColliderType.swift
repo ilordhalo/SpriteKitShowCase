@@ -14,6 +14,7 @@ struct ColliderType: OptionSet, Hashable, CustomDebugStringConvertible {
     static var requestedContactNotifications: [ColliderType: [ColliderType]] = {
         var map = [ColliderType: [ColliderType]]()
         map[.Player] = [.Obstacle, .Player, .BadGuy]
+        map[.BadGuy] = [.Obstacle, .Player, .BadGuy]
         return map
     }()
     
@@ -21,6 +22,7 @@ struct ColliderType: OptionSet, Hashable, CustomDebugStringConvertible {
     static var definedCollisions: [ColliderType: [ColliderType]] = {
         var map = [ColliderType: [ColliderType]]()
         map[.Player] = [.Obstacle, .BadGuy]
+        map[.BadGuy] = [.Obstacle, .Player]
         return map
     }()
 

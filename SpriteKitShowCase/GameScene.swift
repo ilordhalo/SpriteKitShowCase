@@ -9,13 +9,16 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    // MARK: Properties
+    
+    var lastUpdateTimeInterval: TimeInterval = 0
     
     var game: Game {
         return Game.shared
     }
     
     lazy var componentSystems: [GKComponentSystem] = {
-        return [playerControlComponentSystem, humanComponentSystem, directionComponentSystem, animationComponentSystem, physicsComponentSystem, attackComponentSystem]
+        return [rulesComponentSystem, playerControlComponentSystem, humanComponentSystem, directionComponentSystem, animationComponentSystem, physicsComponentSystem, attackComponentSystem]
     }()
     
     let humanComponentSystem = GKComponentSystem(componentClass: HumanComponent.self)
@@ -24,9 +27,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let directionComponentSystem = GKComponentSystem(componentClass: DirectionComponent.self)
     let physicsComponentSystem = GKComponentSystem(componentClass: PhysicsComponent.self)
     let attackComponentSystem = GKComponentSystem(componentClass: AttackComponent.self)
+    let rulesComponentSystem = GKComponentSystem(componentClass: RulesComponent.self)
     
     var entities = [GKEntity]()
     var player: PlayerEntity?
+    var badGuys = [BadGuyEntity]()
+    
+    var playerNode: SKSpriteNode {
+        guard let renderComponent = player?.component(ofType: RenderComponent.self) else {
+            fatalError("A Player's entity must have an RenderComponent.")
+        }
+        return renderComponent.spriteNode
+    }
+    
+    // MARK: Initializers
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -41,15 +55,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupPhysicsBody()
         setupEntities()
         addComponentsToComponentSystems()
+        
+        let deadlineTime = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+            self.createBadGuy()
+        }
     }
     
-    func setupPhysicsBody() {
+    private func setupPhysicsBody() {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsBody?.isDynamic = false
         self.physicsBody?.categoryBitMask = ColliderType.Obstacle.rawValue
     }
     
-    func setupEntities() {
+    private func setupEntities() {
         player = PlayerEntity(game: game)
         entities.append(player!)
         
@@ -68,13 +87,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func addComponentsToComponentSystems() {
+    private func addComponentsToComponentSystems() {
         for entity in entities {
             for componentSystem in componentSystems {
                 componentSystem.addComponent(foundIn: entity)
             }
         }
     }
+    
+    // MARK: Public
+    
+    func entitySnapshotForEntity(entity: GKEntity) -> EntitySnapshot {
+        
+        var node: SKSpriteNode? = nil
+        if let renderComponent = entity.component(ofType: RenderComponent.self) {
+            node = renderComponent.spriteNode
+        }
+        
+        let snapshot = EntitySnapshot(distanceToPlayer: distanceToPlayer(node: node), playerVelocity: playerNode.physicsBody!.velocity, playerPosition: playerNode.position)
+        return snapshot
+    }
+    
+    // MARK: Private
+    
+    private func distanceToPlayer(node: SKSpriteNode?) -> CGFloat? {
+        guard let node = node else {
+            return nil
+        }
+        
+        return distance(pointA: playerNode.position, pointB: node.position)
+    }
+    
+    private func createBadGuy() {
+        let node = SKSpriteNode(imageNamed: "human")
+        node.position = CGPoint(x: 100, y: 50)
+        node.zPosition = 4
+        let badGuy = BadGuyEntity(game: game, node: node)
+        self.addChild(node)
+        
+        badGuys.append(badGuy)
+        entities.append(badGuy)
+        for componentSystem in componentSystems {
+            componentSystem.addComponent(foundIn: badGuy)
+        }
+    }
+    
+    // MARK: SKScene
     
     override func mouseDown(with event: NSEvent) {
     }
@@ -97,12 +155,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         
+        let deltaTime = currentTime - lastUpdateTimeInterval
+        lastUpdateTimeInterval = currentTime
+        
+        for entity in entities {
+            entity.update(deltaTime: deltaTime)
+        }
+        
         for componentSystem in componentSystems {
-            componentSystem.update(deltaTime: currentTime)
+            componentSystem.update(deltaTime: deltaTime)
         }
     }
     

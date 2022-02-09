@@ -22,7 +22,6 @@ class AttackComponent: GKComponent {
     var requestedAttack: Bool = false
     var commandInterval: CGFloat = 0
     var comboInterval: CGFloat = 0
-    var lastUpdateTime: CGFloat = 0
     
     private var attackState: AttackState?
     
@@ -43,11 +42,8 @@ class AttackComponent: GKComponent {
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
         
-        let dt = seconds - lastUpdateTime
-        lastUpdateTime = seconds
-        
-        commandInterval += dt
-        comboInterval += dt
+        commandInterval += seconds
+        comboInterval += seconds
         
         if comboInterval >= attackComboInterval {
             attackState = nil
