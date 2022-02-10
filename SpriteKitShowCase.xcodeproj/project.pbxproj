@@ -28,6 +28,7 @@
 		77233EC02791AE7700685232 /* AnimationComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EBF2791AE7700685232 /* AnimationComponent.swift */; };
 		77233EC22791AF1000685232 /* DirectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EC12791AF1000685232 /* DirectionComponent.swift */; };
 		77233EC42791B32B00685232 /* ColliderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77233EC32791B32B00685232 /* ColliderType.swift */; };
+		77735AF527B50C9100B011AE /* ControlComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77735AF427B50C9100B011AE /* ControlComponent.swift */; };
 		77B953E627B3AB05001054FC /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B953E527B3AB05001054FC /* Rules.swift */; };
 		77B9597127B3B1B4001054FC /* PlayerOnTheGroundRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9597027B3B1B4001054FC /* PlayerOnTheGroundRule.swift */; };
 		77B9597327B3B484001054FC /* PlayerOnTheFloorRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9597227B3B484001054FC /* PlayerOnTheFloorRule.swift */; };
@@ -99,6 +100,7 @@
 		77233EBF2791AE7700685232 /* AnimationComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationComponent.swift; sourceTree = "<group>"; };
 		77233EC12791AF1000685232 /* DirectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionComponent.swift; sourceTree = "<group>"; };
 		77233EC32791B32B00685232 /* ColliderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColliderType.swift; sourceTree = "<group>"; };
+		77735AF427B50C9100B011AE /* ControlComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlComponent.swift; sourceTree = "<group>"; };
 		77B953E527B3AB05001054FC /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		77B9597027B3B1B4001054FC /* PlayerOnTheGroundRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerOnTheGroundRule.swift; sourceTree = "<group>"; };
 		77B9597227B3B484001054FC /* PlayerOnTheFloorRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerOnTheFloorRule.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				77B9597B27B3B937001054FC /* IntelligenceState */,
 				77233EA3278ECD3E00685232 /* IntelligenceComponent.swift */,
 				77233EA5278ECD4A00685232 /* PlayerControlComponent.swift */,
+				77735AF427B50C9100B011AE /* ControlComponent.swift */,
 				77233EBB2791AE5E00685232 /* RenderComponent.swift */,
 				77233EBD2791AE6A00685232 /* PhysicsComponent.swift */,
 				77E3FCCB279974E400C86F42 /* MovementComponent.swift */,
@@ -446,6 +449,7 @@
 				77233EB3278EDEC400685232 /* BadGuyEntity.swift in Sources */,
 				77233EC42791B32B00685232 /* ColliderType.swift in Sources */,
 				77B9597D27B3BA03001054FC /* BadGuyPatrolState.swift in Sources */,
+				77735AF527B50C9100B011AE /* ControlComponent.swift in Sources */,
 				77B9597327B3B484001054FC /* PlayerOnTheFloorRule.swift in Sources */,
 				77E61F4D278865DE003EDFF1 /* SceneBlockNode.swift in Sources */,
 				77233EAF278EDE8F00685232 /* PlayerEntity.swift in Sources */,

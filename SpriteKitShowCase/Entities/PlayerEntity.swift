@@ -55,6 +55,9 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
         
         let humanComponent = HumanComponent(states:setupHumanStates())
         addComponent(humanComponent)
+        
+        let controlComponent = ControlComponent(control: ControlProperty(jumpVector: PhysicsWorld.Entities.Player.jumpVector, runVelocity: PhysicsWorld.Entities.Player.runVelocity))
+        addComponent(controlComponent)
     }
     
     private func setupHumanStates() -> [GKState] {
@@ -68,13 +71,13 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
     }
     
     private func setupPhysicsBody() -> SKPhysicsBody {
-        let physicsBody = SKPhysicsBody(rectangleOf: PhysicsWorld.Entities.Human.bodySize)
-        physicsBody.mass = PhysicsWorld.Entities.Human.mass;
+        let physicsBody = SKPhysicsBody(rectangleOf: PhysicsWorld.Entities.Player.bodySize)
+        physicsBody.mass = PhysicsWorld.Entities.Player.mass;
         physicsBody.isDynamic = true
         physicsBody.affectedByGravity = true
         physicsBody.allowsRotation = false
-        physicsBody.restitution = PhysicsWorld.Entities.Human.restitution
-        physicsBody.friction = PhysicsWorld.Entities.Human.friction
+        physicsBody.restitution = PhysicsWorld.Entities.Player.restitution
+        physicsBody.friction = PhysicsWorld.Entities.Player.friction
         return physicsBody
     }
     

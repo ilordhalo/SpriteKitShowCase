@@ -57,6 +57,9 @@ class BadGuyEntity: GKEntity, ContactNotifiableType, RulesComponentDelegate {
         let rulesComponent = RulesComponent(rules: [PlayerNearRule(), PlayerFarRule(), PlayerOnTheFloorRule()])
         rulesComponent.delegate = self
         addComponent(rulesComponent)
+        
+        let controlComponent = ControlComponent(control: ControlProperty(jumpVector: PhysicsWorld.Entities.BadGuy.jumpVector, runVelocity: PhysicsWorld.Entities.BadGuy.runVelocity))
+        addComponent(controlComponent)
     }
     
     private func setupHumanStates() -> [GKState] {
@@ -70,13 +73,13 @@ class BadGuyEntity: GKEntity, ContactNotifiableType, RulesComponentDelegate {
     }
     
     private func setupPhysicsBody() -> SKPhysicsBody {
-        let physicsBody = SKPhysicsBody(rectangleOf: PhysicsWorld.Entities.Human.bodySize)
-        physicsBody.mass = PhysicsWorld.Entities.Human.mass;
+        let physicsBody = SKPhysicsBody(rectangleOf: PhysicsWorld.Entities.BadGuy.bodySize)
+        physicsBody.mass = PhysicsWorld.Entities.BadGuy.mass;
         physicsBody.isDynamic = true
         physicsBody.affectedByGravity = true
         physicsBody.allowsRotation = false
-        physicsBody.restitution = PhysicsWorld.Entities.Human.restitution
-        physicsBody.friction = PhysicsWorld.Entities.Human.friction
+        physicsBody.restitution = PhysicsWorld.Entities.BadGuy.restitution
+        physicsBody.friction = PhysicsWorld.Entities.BadGuy.friction
         return physicsBody
     }
     
@@ -117,21 +120,29 @@ class BadGuyEntity: GKEntity, ContactNotifiableType, RulesComponentDelegate {
         return rulesComponent
     }
     
+    var controlComponent: ControlComponent {
+        guard let controlComponent = self.component(ofType: ControlComponent.self) else {
+            fatalError("BadGuyEntity must have an ControlComponent.")
+        }
+        return controlComponent
+    }
+    
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
-        
         
     }
     
     // MARK: Public
     
     func huntPlayer() {
-        guard let snapshot = rulesComponent.ruleSystem.state[RuleState.snapshot] as? EntitySnapshot else {
+        guard let snapshot = rulesComponent.ruleSystem.state[RuleState.snapshot.rawValue] as? EntitySnapshot else {
             return
         }
         
         if snapshot.playerPosition.x < node.position.x {
-            
+            controlComponent.requestedCommand = .goLeft
+        } else {
+            controlComponent.requestedCommand = .goRight
         }
     }
     

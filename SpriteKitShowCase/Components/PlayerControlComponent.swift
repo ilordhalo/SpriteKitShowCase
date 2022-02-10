@@ -97,11 +97,11 @@ class PlayerControlComponent: GKComponent {
         return physicsComponent
     }
     
-    var attackComponent: AttackComponent {
-        guard let attackComponent = entity?.component(ofType: AttackComponent.self) else {
-            fatalError("A PlayerControlComponent's entity must have a AttackComponent")
+    var controlComponent: ControlComponent {
+        guard let controlComponent = entity?.component(ofType: ControlComponent.self) else {
+            fatalError("A PlayerControlComponent's entity must have a ControlComponent")
         }
-        return attackComponent
+        return controlComponent
     }
     
     // MARK: Public
@@ -120,27 +120,6 @@ class PlayerControlComponent: GKComponent {
         }
     }
     
-    private func handleCommand(command: PlayerCommand) {
-        switch command.commandType {
-        case .jump:
-            if physicsComponent.onTheGround {
-                physicsComponent.physicsBody.applyImpulse(PhysicsWorld.Entities.Human.jumpVector)
-            }
-        case .goLeft:
-            directionComponent.requestedDirection = .left
-            physicsComponent.physicsBody.velocity.dx = PhysicsWorld.Entities.Human.runVelocity * directionComponent.K
-        case .goRight:
-            directionComponent.requestedDirection = .right
-            physicsComponent.physicsBody.velocity.dx = PhysicsWorld.Entities.Human.runVelocity * directionComponent.K
-        case .attack:
-            attackComponent.requestedAttack = true
-        case .stopGoLeft, .stopGoRight:
-            physicsComponent.physicsBody.velocity.dx = 0
-        default:
-            break
-        }
-    }
-    
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
         
@@ -150,7 +129,7 @@ class PlayerControlComponent: GKComponent {
             guard let lastCommand = commandQueue.last else {
                 return
             }
-            handleCommand(command: lastCommand)
+            controlComponent.requestedCommand = ControlCommand(rawValue: lastCommand.commandType!.rawValue)
             
             commandQueue.removeAll()
             interval = 0

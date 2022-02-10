@@ -20,6 +20,8 @@ class BadGuyAttackState: GKState {
     override func didEnter(from previousState: GKState?) {
         super.didEnter(from: previousState)
         
+//        let badGuy = entity as! BadGuyEntity
+//        badGuy.huntPlayer()
         print("hunt")
     }
     

@@ -21,8 +21,8 @@ struct ColliderType: OptionSet, Hashable, CustomDebugStringConvertible {
     /// A dictionary of which `ColliderType`s should collide with other `ColliderType`s.
     static var definedCollisions: [ColliderType: [ColliderType]] = {
         var map = [ColliderType: [ColliderType]]()
-        map[.Player] = [.Obstacle, .BadGuy]
-        map[.BadGuy] = [.Obstacle, .Player]
+        map[.Player] = [.Obstacle]
+        map[.BadGuy] = [.Obstacle]
         return map
     }()
 

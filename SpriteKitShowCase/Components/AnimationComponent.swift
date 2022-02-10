@@ -12,7 +12,19 @@ class AnimationComponent: GKComponent {
     
     // MARK: Properties
     
-    var requestedAnimationIdentifier: AnimationIdentifier?
+    var times: Int = 0
+    var requestedAnimationIdentifier: AnimationIdentifier? {
+        didSet {
+            let player = entity?.component(ofType: PlayerControlComponent.self)
+            if player == nil {
+                guard let requestedAnimationIdentifier = requestedAnimationIdentifier else {
+                    return
+                }
+
+                print("\(times), \(requestedAnimationIdentifier)")
+            }
+        }
+    }
     
     var requestedNoAnimation: Bool = false
     
@@ -29,6 +41,8 @@ class AnimationComponent: GKComponent {
     
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
+        
+        times+=1
         
         enterNextAnimationIfNeeded()
         

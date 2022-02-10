@@ -66,10 +66,18 @@ class HumanComponent: GKComponent {
         } else {
             if physicsComponent.physicsBody.velocity.dx != 0 {
                 stateMachine.enter(HumanRunningState.self)
+                let player = entity?.component(ofType: PlayerControlComponent.self)
+                if player == nil {
+                    print("run")
+                }
+                
             } else {
                 stateMachine.enter(HumanStandingState.self)
+                let player = entity?.component(ofType: PlayerControlComponent.self)
+                if player == nil {
+//                    print("stand")
+                }
             }
-            
         }
     }
 }

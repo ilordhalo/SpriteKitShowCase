@@ -8,7 +8,7 @@
 import Foundation
 import GameplayKit
 
-let attackCommandInterval: CGFloat = 0.1
+let attackCommandInterval: CGFloat = 0.2
 let attackComboInterval: CGFloat = 1
 
 enum AttackState: Int {
@@ -39,6 +39,13 @@ class AttackComponent: GKComponent {
         return animationComponent
     }
     
+    var humanComponent: HumanComponent {
+        guard let humanComponent = entity?.component(ofType: HumanComponent.self) else {
+            fatalError("A AttackComponent's entity must have a HumanComponent")
+        }
+        return humanComponent
+    }
+    
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
         
@@ -61,7 +68,6 @@ class AttackComponent: GKComponent {
     }
     
     private func enterNextAttack() {
-        print("enter")
         if attackState == nil {
             enter(state: .hit)
         } else {
@@ -80,5 +86,7 @@ class AttackComponent: GKComponent {
         case .kick:
             animationComponent.requestedAnimationIdentifier = .humanAttackKick
         }
+        
+        humanComponent.stateMachine.enter(HumanAttackingState.self)
     }
 }
