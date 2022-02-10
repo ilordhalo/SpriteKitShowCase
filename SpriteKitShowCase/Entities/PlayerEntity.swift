@@ -58,6 +58,9 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
         
         let controlComponent = ControlComponent(control: ControlProperty(jumpVector: PhysicsWorld.Entities.Player.jumpVector, runVelocity: PhysicsWorld.Entities.Player.runVelocity))
         addComponent(controlComponent)
+        
+        let hurtComponent = HurtComponent()
+        addComponent(hurtComponent)
     }
     
     private func setupHumanStates() -> [GKState] {
@@ -66,8 +69,9 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
         let standing = HumanStandingState(entity: self)
         let attacking = HumanAttackingState(entity: self)
         let death = HumanDeathState(entity: self)
+        let hurt = HumanHurtState(entity: self)
         
-        return [jumping, running, standing, attacking, death]
+        return [jumping, running, standing, attacking, death, hurt]
     }
     
     private func setupPhysicsBody() -> SKPhysicsBody {
@@ -104,14 +108,27 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
         return physicsComponent
     }
     
+    var attackComponent: AttackComponent {
+        guard let attackComponent = self.component(ofType: AttackComponent.self) else {
+            fatalError("PlayerEntity must have an AttackComponent.")
+        }
+        return attackComponent
+    }
+    
+    override func update(deltaTime seconds: TimeInterval) {
+        super.update(deltaTime: seconds)
+        
+    }
+    
     // MARK: Public
     
     // MARK: ContactNotifiableType
     
     func contactWithEntityDidBegin(_ entity: GKEntity, contact: SKPhysicsContact) {
-        if (contact.contactNormal.dy < 0 && entity.component(ofType: GroundComponent.self) != nil) {
-            // hit the ground
-        }
+//        if (entity is BadGuyEntity) && attackComponent.isAttacking {
+//            let badGuy = entity as! BadGuyEntity
+//            badGuy.hurtComponent.requestedHurt = true
+//        }
     }
     
     func contactWithEntityDidEnd(_ entity: GKEntity, contack: SKPhysicsContact) {

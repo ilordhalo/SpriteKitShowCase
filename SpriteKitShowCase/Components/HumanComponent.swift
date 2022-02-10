@@ -12,8 +12,6 @@ class HumanComponent: GKComponent {
     
     let stateMachine: GKStateMachine
     
-    var requestedState: GKState.Type?
-    
     init(states: [GKState]) {
         stateMachine = GKStateMachine(states: states)
         
@@ -56,27 +54,39 @@ class HumanComponent: GKComponent {
         return directionComponent
     }
     
+    var attackComponent: AttackComponent {
+        guard let attackComponent = entity?.component(ofType: AttackComponent.self) else {
+            fatalError("A HumanComponent's entity must have a AttackComponent")
+        }
+        return attackComponent
+    }
+    
+    var hurtComponent: HurtComponent {
+        guard let hurtComponent = entity?.component(ofType: HurtComponent.self) else {
+            fatalError("A HumanComponent's entity must have a HurtComponent")
+        }
+        return hurtComponent
+    }
+    
     // MARK: Update Action
     
     override func update(deltaTime seconds: TimeInterval) {
         super.update(deltaTime: seconds)
         
+        if hurtComponent.isHurting {
+            stateMachine.enter(HumanHurtState.self)
+            return
+        }
+        
         if !physicsComponent.onTheGround {
             stateMachine.enter(HumanJumpingState.self)
         } else {
-            if physicsComponent.physicsBody.velocity.dx != 0 {
+            if attackComponent.isAttacking {
+                stateMachine.enter(HumanAttackingState.self)
+            } else if physicsComponent.physicsBody.velocity.dx != 0 {
                 stateMachine.enter(HumanRunningState.self)
-                let player = entity?.component(ofType: PlayerControlComponent.self)
-                if player == nil {
-                    print("run")
-                }
-                
             } else {
                 stateMachine.enter(HumanStandingState.self)
-                let player = entity?.component(ofType: PlayerControlComponent.self)
-                if player == nil {
-//                    print("stand")
-                }
             }
         }
     }

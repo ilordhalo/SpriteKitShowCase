@@ -60,6 +60,9 @@ class BadGuyEntity: GKEntity, ContactNotifiableType, RulesComponentDelegate {
         
         let controlComponent = ControlComponent(control: ControlProperty(jumpVector: PhysicsWorld.Entities.BadGuy.jumpVector, runVelocity: PhysicsWorld.Entities.BadGuy.runVelocity))
         addComponent(controlComponent)
+        
+        let hurtComponent = HurtComponent()
+        addComponent(hurtComponent)
     }
     
     private func setupHumanStates() -> [GKState] {
@@ -68,8 +71,9 @@ class BadGuyEntity: GKEntity, ContactNotifiableType, RulesComponentDelegate {
         let standing = HumanStandingState(entity: self)
         let attacking = HumanAttackingState(entity: self)
         let death = HumanDeathState(entity: self)
+        let hurt = HumanHurtState(entity: self)
         
-        return [jumping, running, standing, attacking, death]
+        return [jumping, running, standing, attacking, death, hurt]
     }
     
     private func setupPhysicsBody() -> SKPhysicsBody {
@@ -97,6 +101,13 @@ class BadGuyEntity: GKEntity, ContactNotifiableType, RulesComponentDelegate {
             fatalError("BadGuyEntity must have an HumanComponent.")
         }
         return humanComponent
+    }
+    
+    var hurtComponent: HurtComponent {
+        guard let hurtComponent = self.component(ofType: HurtComponent.self) else {
+            fatalError("BadGuyEntity must have an HurtComponent.")
+        }
+        return hurtComponent
     }
     
     var physicsComponent: PhysicsComponent {

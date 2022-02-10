@@ -8,8 +8,9 @@
 import Foundation
 import GameplayKit
 
-let attackCommandInterval: CGFloat = 0.2
-let attackComboInterval: CGFloat = 1
+let attackCommandInterval: TimeInterval = 0.2
+let attackComboInterval: TimeInterval = 1
+let attackActionInterval: TimeInterval = 0.2
 
 enum AttackState: Int {
     case hit = 0
@@ -20,8 +21,12 @@ enum AttackState: Int {
 class AttackComponent: GKComponent {
     
     var requestedAttack: Bool = false
-    var commandInterval: CGFloat = 0
-    var comboInterval: CGFloat = 0
+    private var commandInterval: CGFloat = 0
+    private var comboInterval: CGFloat = 0
+    private var actionInterval: CGFloat = 0
+    var isAttacking: Bool {
+        return actionInterval < attackActionInterval
+    }
     
     private var attackState: AttackState?
     
@@ -51,6 +56,7 @@ class AttackComponent: GKComponent {
         
         commandInterval += seconds
         comboInterval += seconds
+        actionInterval += seconds
         
         if comboInterval >= attackComboInterval {
             attackState = nil
@@ -74,6 +80,7 @@ class AttackComponent: GKComponent {
             enter(state: AttackState(rawValue: (attackState!.rawValue + 1) % 3)!)
         }
         
+        actionInterval = 0
     }
     
     private func enter(state: AttackState) {
@@ -86,7 +93,5 @@ class AttackComponent: GKComponent {
         case .kick:
             animationComponent.requestedAnimationIdentifier = .humanAttackKick
         }
-        
-        humanComponent.stateMachine.enter(HumanAttackingState.self)
     }
 }

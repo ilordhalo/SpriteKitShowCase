@@ -26,7 +26,7 @@ class DirectionComponent: GKComponent {
         return direction == .left ? -1 : 1
     }
     
-    private var currentDirection: Direction = .right
+    private(set) var currentDirection: Direction = .right
     
     var renderComponent: RenderComponent {
         guard let renderComponent = entity?.component(ofType: RenderComponent.self) else {

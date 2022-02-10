@@ -18,7 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     lazy var componentSystems: [GKComponentSystem] = {
-        return [rulesComponentSystem, playerControlComponentSystem, controlCompnentSystem, physicsComponentSystem, humanComponentSystem, directionComponentSystem, animationComponentSystem, attackComponentSystem]
+        return [rulesComponentSystem, playerControlComponentSystem, controlCompnentSystem, physicsComponentSystem, attackComponentSystem, hurtCompnentSystem, humanComponentSystem, directionComponentSystem, animationComponentSystem]
     }()
     
     let humanComponentSystem = GKComponentSystem(componentClass: HumanComponent.self)
@@ -29,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let attackComponentSystem = GKComponentSystem(componentClass: AttackComponent.self)
     let rulesComponentSystem = GKComponentSystem(componentClass: RulesComponent.self)
     let controlCompnentSystem = GKComponentSystem(componentClass: ControlComponent.self)
+    let hurtCompnentSystem = GKComponentSystem(componentClass: HurtComponent.self)
     
     var entities = [GKEntity]()
     var player: PlayerEntity?
@@ -61,6 +62,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
             self.createBadGuy()
         }
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(3)) {
+//            self.createBadGuy()
+//        }
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(5)) {
+//            self.createBadGuy()
+//            self.createBadGuy()
+//        }
     }
     
     private func setupPhysicsBody() {
@@ -162,12 +170,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let deltaTime = currentTime - lastUpdateTimeInterval
         lastUpdateTimeInterval = currentTime
         
+        detectAttackFact()
+        
         for entity in entities {
             entity.update(deltaTime: deltaTime)
         }
         
         for componentSystem in componentSystems {
             componentSystem.update(deltaTime: deltaTime)
+        }
+    }
+    
+    // MARK: AttackDetector
+    
+    private func detectAttackFact() {
+        for component in attackComponentSystem.components {
+            let attackComponent = component as! AttackComponent
+            let direction = attackComponent.humanComponent.directionComponent.currentDirection
+            if attackComponent.isAttacking {
+                for component_ in hurtCompnentSystem.components {
+                    let hurtComponent = component_ as! HurtComponent
+                    let distance = distanceInSameGround(pointA: hurtComponent.renderComponent.spriteNode.position, pointB: attackComponent.renderComponent.spriteNode.position, direction: direction)
+                    if distance > 0 && distance < 15 {
+                        if player == hurtComponent.entity && player!.attackComponent.isAttacking {
+                            attackComponent.humanComponent.hurtComponent.requestedHurt = true
+                        } else {
+                            hurtComponent.requestedHurt = true
+                        }
+                        
+                        print("\(attackComponent.entity) attack \(hurtComponent.entity)")
+                    }
+                }
+            }
         }
     }
     

@@ -60,6 +60,10 @@ class IntelligenceComponent: GKComponent {
                 return
             }
             
+            if controlComponent.humanComponent.hurtComponent.isHurting {
+                return
+            }
+            
             if abs(snapshot.playerPosition.x - renderComponent.spriteNode.position.x) < 15 {
                 controlComponent.requestedCommand = .attack
             } else {

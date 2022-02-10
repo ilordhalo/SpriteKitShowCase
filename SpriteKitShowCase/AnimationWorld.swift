@@ -13,6 +13,7 @@ enum AnimationIdentifier: String, CaseIterable {
     case humanAttackHit = "human_attack_hit"
     case humanAttackHardHit = "human_attack_hardhit"
     case humanAttackKick = "human_attack_kick"
+    case humanHurt = "human_hurt"
 }
 
 enum AnimationActionKey: String {
@@ -127,5 +128,8 @@ class AnimationWorld {
         
         let humanAttackKick = factory.animation(identifier: AnimationIdentifier.humanAttackKick, repeatTexturesForever: false, timePerFrame: 0.1)
         animations[AnimationIdentifier.humanAttackKick.rawValue] = humanAttackKick
+        
+        let humanHurt = factory.animation(identifier: AnimationIdentifier.humanHurt, repeatTexturesForever: false, timePerFrame: 0.07)
+        animations[AnimationIdentifier.humanHurt.rawValue] = humanHurt
     }
 }
