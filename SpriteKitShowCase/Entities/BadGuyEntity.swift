@@ -45,9 +45,6 @@ class BadGuyEntity: GKEntity, ContactNotifiableType, RulesComponentDelegate {
         let intelligenceComponent = IntelligenceComponent(states: [BadGuyPatrolState(entity: self), BadGuyAttackState(entity: self)])
         addComponent(intelligenceComponent)
         
-        let movementComponent = MovementComponent()
-        addComponent(movementComponent)
-        
         let attackComponent = AttackComponent()
         addComponent(attackComponent)
         

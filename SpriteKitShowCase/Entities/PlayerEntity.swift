@@ -47,9 +47,6 @@ class PlayerEntity: GKEntity, ContactNotifiableType {
         let playerControlComponent = PlayerControlComponent()
         addComponent(playerControlComponent)
         
-        let movementComponent = MovementComponent()
-        addComponent(movementComponent)
-        
         let attackComponent = AttackComponent()
         addComponent(attackComponent)
         
