@@ -1,3 +1,5 @@
+# SpriteKit&GameplayKit - 2D游戏开发
+
 ## SpriteKit
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ff6c56777357436692c8f0ddf3dbc9db~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=878&h=410&s=71080&e=png&b=141414)
@@ -224,8 +226,3 @@ https://www.kingyeung.com/2014/05/spritekitkuai-su-ru-men/
 -   [Boxes: GameplayKit Entity-Component Basics](https://developer.apple.com/library/archive/samplecode/Boxes_GamePlayKit/Introduction/Intro.html#//apple_ref/doc/uid/TP40016459)
 -   [AgentsCatalog: Using the Agents System in GameplayKit](https://developer.apple.com/library/archive/samplecode/AgentsCatalog/Introduction/Intro.html#//apple_ref/doc/uid/TP40016141)
 -   [DemoBots: Building a Cross Platform Game with SpriteKit and GameplayKit](https://developer.apple.com/library/archive/samplecode/DemoBots/Introduction/Intro.html#//apple_ref/doc/uid/TP40015179)
-
-
-## ShowCase
-
-![showcase.gif](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a56353f36f2e424fa3adc7633c462937~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=602&h=314&s=2196725&e=gif&f=345&b=cd5c9c)
